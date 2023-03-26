@@ -14,7 +14,8 @@ app.UseEndpoints(endpoints =>
     
     endpoints.Map("countries/{countryId:int:range(1,100)?}", async context =>
     {
-        var countriesCount = countryDict.Count;      
+        var countriesCount = countryDict.Count;    
+        
         if (!context.Request.RouteValues.ContainsKey("countryId"))
         {
             var countries = GetIdNameCountriesFormatted(countryDict);
@@ -37,13 +38,18 @@ app.UseEndpoints(endpoints =>
             }
         }
     });
+
+    endpoints.MapGet("countries/{countryId:int:minlength(101)}", async context =>
+    {
+        if (context.Response.StatusCode == 200)
+            context.Response.StatusCode = 400;
+        await context.Response.WriteAsync("The CountryID should be between 1 and 100");
+    });
 });
 
 app.Run(async context =>
 {
-    if (context.Response.StatusCode == 200)
-        context.Response.StatusCode = 400;
-    await context.Response.WriteAsync("The CountryID should be between 1 and 100");
+    await context.Response.WriteAsync("No Response");
 });
 
 app.Run();

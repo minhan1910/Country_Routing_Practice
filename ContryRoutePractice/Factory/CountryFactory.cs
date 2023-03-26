@@ -18,7 +18,7 @@ namespace ContryRoutePractice.Factory
                 {CountryEnum.Canada, new CanadaCountry("Canada") }
             };
 
-        private static Dictionary<CountryEnum, Country> countryEnumCountry = new Dictionary<CountryEnum, Country>()
+        private static Dictionary<CountryEnum, Country> CountryEnumCountry = new Dictionary<CountryEnum, Country>()
         {
                 {CountryEnum.US, CreateCountry(CountryEnum.US) },
                 {CountryEnum.UK,CreateCountry(CountryEnum.UK) },
@@ -38,6 +38,6 @@ namespace ContryRoutePractice.Factory
             return new DefaultCountry("Default Class");
         }
 
-        public static Dictionary<CountryEnum, Country> Countries() => countryEnumCountry;
+        public static Dictionary<CountryEnum, Country> Countries() => CountryEnumCountry;
     }
 }
